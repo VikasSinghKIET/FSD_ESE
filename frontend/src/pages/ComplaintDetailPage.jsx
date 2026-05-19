@@ -171,7 +171,7 @@ const ComplaintDetailPage = () => {
             </div>
           </div>
           
-          {isAdmin && (
+          {(isAdmin || (isOwner && !complaint.isAiAnalyzed)) && (
             <Button onClick={handleAnalyzeAI} loading={aiLoading} icon={Zap}>
               {complaint.isAiAnalyzed ? "Re-Analyze AI" : "Run Analysis"}
             </Button>
@@ -183,7 +183,7 @@ const ComplaintDetailPage = () => {
             <div className="text-center py-8">
               <Brain className="mx-auto text-slate-600 mb-3" size={32} />
               <p className="text-slate-400">This complaint hasn't been analyzed by AI yet.</p>
-              {isAdmin && (
+              {(isAdmin || isOwner) && (
                 <button 
                   onClick={handleAnalyzeAI}
                   className="mt-2 text-violet-400 text-sm hover:underline"
