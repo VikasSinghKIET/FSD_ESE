@@ -1,0 +1,32 @@
+services:
+  # Backend Node.js API
+  - type: web
+    name: ai-complaint-api
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: CLIENT_URL
+        value: https://ai-complaint-system-web.onrender.com
+
+  # Frontend Vite React App
+  - type: web
+    name: ai-complaint-web
+    env: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://ai-complaint-system-api.onrender.com

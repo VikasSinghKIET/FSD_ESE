@@ -1,0 +1,16 @@
+{
+  "name": "fsd-ese-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Full Stack Development ESE - Monorepo",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
+    "install:all": "npm --prefix frontend install && npm --prefix backend install",
+    "build": "npm --prefix frontend run build"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
