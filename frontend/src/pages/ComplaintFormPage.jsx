@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { Send, MapPin, Tag } from "lucide-react";
 import { complaintService } from "../services/complaintService";
 import { CATEGORIES } from "../utils/helpers";
+import { useAuth } from "../context/AuthContext";
 import FormInput from "../components/FormInput";
 import Button from "../components/Button";
 
@@ -21,7 +22,7 @@ const ComplaintFormPage = () => {
 
   // Since we have auth, we can auto-fill name/email on backend, but schema requires it.
   // We'll let user type it or pre-fill from context.
-  const { user } = require("../context/AuthContext").useAuth();
+  const { user } = useAuth();
 
   // Initialize with user data
   useState(() => {
