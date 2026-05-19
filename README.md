@@ -166,28 +166,3 @@ This project includes a `render.yaml` file for easy deployment as a Blueprint on
    - **ai-complaint-web** (Static Site for React)
 5. Go to the Render Dashboard for the API service and add your `MONGO_URI`, `JWT_SECRET`, and `OPENROUTER_API_KEY`.
 6. Update the `VITE_API_URL` on the frontend service to point to your live backend URL.
-
----
-
-## 🎓 Viva Questions & Answers
-
-**Q1: What is the difference between `res.send()` and `res.json()` in Express?**
-> `res.send()` can send Strings, Buffers, Arrays, or Objects and sets the Content-Type automatically based on the data. `res.json()` forces the response to be sent as JSON formatting and always sets the Content-Type to `application/json`.
-
-**Q2: How does JWT Authentication work in this project?**
-> When a user logs in, the server creates a token containing the user's `_id` signed with a secret key (`JWT_SECRET`). The client stores this token in `localStorage` and sends it in the `Authorization: Bearer <token>` header for protected routes. The `protect` middleware verifies this signature to grant access.
-
-**Q3: Why did you use `bcryptjs` for password hashing?**
-> Storing plain text passwords is a massive security risk. `bcryptjs` hashes the password using a mathematical one-way function and adds a "salt" (random data) to defend against rainbow table attacks. Even if the database is compromised, the original passwords cannot be easily read.
-
-**Q4: How did you implement Role-Based Access Control (RBAC)?**
-> The User schema has a `role` enum (`user`, `admin`). I created an `authorizeRoles("admin")` middleware in Express. After the `protect` middleware attaches the logged-in user to `req.user`, the authorize middleware checks if `req.user.role` matches the required role before proceeding to the controller.
-
-**Q5: What is Context API and why is it used here?**
-> The React Context API provides a way to pass data through the component tree without having to pass props down manually at every level ("prop drilling"). Here, `AuthContext` holds the logged-in user's state, token, and login/logout functions, making them accessible globally across all pages and components.
-
-**Q6: Explain the MVC architecture used in the backend.**
-> MVC stands for Model-View-Controller.
-> - **Models** (`/src/models`): Define the database schema and interact with MongoDB using Mongoose.
-> - **Controllers** (`/src/controllers`): Contain the core business logic. They take the request, process it using models, and send a response.
-> - **Views**: In a MERN stack, the view layer is handled entirely by the React frontend, receiving JSON data from the Express controllers via API routes.
