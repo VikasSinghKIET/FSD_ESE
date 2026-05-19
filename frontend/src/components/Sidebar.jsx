@@ -63,7 +63,9 @@ const Sidebar = ({ isOpen, onClose }) => {
           <p className="text-xs font-semibold text-slate-600 uppercase tracking-wider px-4 mb-2">
             Main
           </p>
-          {navItems.map(({ to, icon: Icon, label }) => (
+          {navItems
+            .filter(item => !isAdmin || item.to === "/dashboard")
+            .map(({ to, icon: Icon, label }) => (
             <NavLink key={to} to={to} className={linkClass} onClick={onClose}>
               <Icon size={18} />
               {label}

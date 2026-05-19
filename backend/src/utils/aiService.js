@@ -9,40 +9,40 @@ const MODEL = "openai/gpt-4o-mini";
  * @returns {Object} AI analysis result
  */
 const analyzeComplaint = async ({ title, description, category, location }) => {
-  const prompt = `You are an AI assistant for a public complaint management system. Analyze the following complaint and respond ONLY with a valid JSON object — no markdown, no explanation.
+  const prompt = `You are an AI complaint analyzer for a government complaint management system.
 
-Complaint Details:
-- Title: ${title}
-- Category: ${category}
-- Location: ${location}
-- Description: ${description}
+Analyze the complaint carefully and determine:
 
-Analyze and return a JSON with these exact keys:
+1. Priority:
+- High
+- Medium
+- Low
+
+Rules:
+- HIGH = danger, emergency, public safety, electricity/fire/gas
+- MEDIUM = operational issues affecting daily life
+- LOW = cosmetic issues, suggestions, minor inconveniences
+
+2. Responsible Department
+
+3. Short Summary
+
+4. Auto-generated response message
+
+Return STRICT JSON only with these exact keys:
 {
-  "priority": "Low" | "Medium" | "High" | "Critical",
-  "department": "<responsible department name>",
-  "summary": "<2-3 sentence summary of the complaint>",
-  "autoResponse": "<professional acknowledgment message to the complainant>",
-  "confidenceScore": <number between 0-100>
+  "priority": "High" | "Medium" | "Low",
+  "department": "Name of Department",
+  "summary": "Short Summary",
+  "autoResponse": "Auto-generated response message",
+  "confidenceScore": 95
 }
 
-Department assignment rules:
-- Water leakage / supply issues → Water Supply Department
-- Electricity / power outage / transformer → Electricity Department
-- Garbage / waste / sanitation → Sanitation & Waste Department
-- Road damage / potholes / construction → Public Works Department
-- Crime / safety / noise → Law Enforcement
-- Hospital / medical → Healthcare Department
-- School / college / education → Education Department
-- Other → General Administration
-
-Priority rules:
-- Life-threatening or safety risk → Critical
-- Electricity/water complete outage → High
-- Partial services affected → Medium
-- General maintenance → Low
-
-Respond ONLY with the JSON. No extra text.`;
+Complaint:
+Title: ${title}
+Category: ${category}
+Location: ${location}
+Description: ${description}`;
 
   const response = await axios.post(
     OPENROUTER_URL,

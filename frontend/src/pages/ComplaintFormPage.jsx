@@ -144,7 +144,7 @@ const ComplaintFormPage = () => {
               Cancel
             </Button>
             <Button type="submit" loading={loading} icon={Send}>
-              Submit Complaint
+              {loading ? "Analyzing with AI..." : "Submit Complaint"}
             </Button>
           </div>
         </form>

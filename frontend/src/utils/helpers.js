@@ -28,7 +28,6 @@ export const getPriorityClass = (priority) => {
     Low: "badge-low",
     Medium: "badge-medium",
     High: "badge-high",
-    Critical: "badge-critical",
   };
   return map[priority] || "badge-medium";
 };

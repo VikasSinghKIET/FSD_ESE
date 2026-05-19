@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const aiAnalysisSchema = new mongoose.Schema(
   {
-    priority: { type: String, enum: ["Low", "Medium", "High", "Critical"], default: "Medium" },
+    priority: { type: String, enum: ["Low", "Medium", "High"], default: "Medium" },
     department: { type: String, default: "" },
     summary: { type: String, default: "" },
     autoResponse: { type: String, default: "" },
