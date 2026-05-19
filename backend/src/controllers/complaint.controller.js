@@ -8,7 +8,18 @@ const createComplaint = async (req, res, next) => {
   try {
     const { name, email, title, description, category, location } = req.body;
 
-    let complaint = await Complaint.create({
+    let aiResult = null;
+    let isAiAnalyzed = false;
+
+    try {
+      aiResult = await analyzeComplaint({ title, description, category, location });
+      isAiAnalyzed = true;
+    } catch (aiError) {
+      console.error("Auto AI Analysis failed:", aiError);
+      // We do not fail the request if AI fails
+    }
+
+    const complaint = await Complaint.create({
       name,
       email,
       title,
@@ -16,17 +27,9 @@ const createComplaint = async (req, res, next) => {
       category,
       location,
       submittedBy: req.user._id,
+      aiAnalysis: aiResult,
+      isAiAnalyzed,
     });
-
-    try {
-      const aiResult = await analyzeComplaint({ title, description, category, location });
-      complaint.aiAnalysis = aiResult;
-      complaint.isAiAnalyzed = true;
-      await complaint.save();
-    } catch (aiError) {
-      console.error("Auto AI Analysis failed:", aiError);
-      // We do not fail the request if AI fails
-    }
 
     res.status(201).json({ success: true, message: "Complaint submitted successfully.", complaint });
   } catch (error) {

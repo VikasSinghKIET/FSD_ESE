@@ -83,8 +83,14 @@ Description: ${description}`;
     };
   }
 
+  const validPriorities = ["Low", "Medium", "High"];
+  let finalPriority = parsed.priority;
+  if (!validPriorities.includes(finalPriority)) {
+    finalPriority = "Medium";
+  }
+
   return {
-    priority: parsed.priority || "Medium",
+    priority: finalPriority,
     department: parsed.department || "General Administration",
     summary: parsed.summary || "",
     autoResponse: parsed.autoResponse || "",
