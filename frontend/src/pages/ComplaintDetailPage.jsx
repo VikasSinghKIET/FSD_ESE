@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { 
-  ArrowLeft, Brain, Trash2, Edit, MapPin, Tag, 
-  Clock, User, CheckCircle, AlertTriangle, Zap
+  ArrowLeft, Brain, Trash2, MapPin, Tag, 
+  User, CheckCircle, AlertTriangle, Zap
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { complaintService } from "../services/complaintService";
@@ -24,22 +24,23 @@ const ComplaintDetailPage = () => {
   const [deleteModal, setDeleteModal] = useState(false);
   const [statusLoading, setStatusLoading] = useState(false);
 
-  useEffect(() => {
-    fetchComplaint();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
-
   const fetchComplaint = async () => {
     try {
       const res = await complaintService.getById(id);
       setComplaint(res.complaint);
-    } catch (error) {
+    } catch {
       toast.error("Failed to load complaint details");
       navigate("/complaints");
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchComplaint();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   const handleAnalyzeAI = async () => {
     setAiLoading(true);
@@ -61,7 +62,7 @@ const ComplaintDetailPage = () => {
       const res = await complaintService.update(id, { status: newStatus });
       setComplaint(res.complaint);
       toast.success("Status updated");
-    } catch (error) {
+    } catch {
       toast.error("Failed to update status");
     } finally {
       setStatusLoading(false);
@@ -73,7 +74,7 @@ const ComplaintDetailPage = () => {
       await complaintService.delete(id);
       toast.success("Complaint deleted");
       navigate("/complaints");
-    } catch (error) {
+    } catch {
       toast.error("Failed to delete complaint");
       setDeleteModal(false);
     }

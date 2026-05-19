@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { Bell, LogOut, User, Menu, X, Zap } from "lucide-react";
+import { LogOut, Menu, Zap } from "lucide-react";
 import { useState } from "react";
 
 const Navbar = ({ onMenuClick }) => {

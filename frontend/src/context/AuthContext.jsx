@@ -10,6 +10,13 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(() => localStorage.getItem("token"));
   const [loading, setLoading] = useState(true);
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setToken(null);
+    setUser(null);
+  };
+
   useEffect(() => {
     const verify = async () => {
       if (token) {
@@ -24,6 +31,7 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     };
     verify();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const login = (data) => {
@@ -31,13 +39,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("user", JSON.stringify(data.user));
     setToken(data.token);
     setUser(data.user);
-  };
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setToken(null);
-    setUser(null);
   };
 
   const isAdmin = user?.role === "admin";
@@ -50,6 +51,7 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
   const ctx = useContext(AuthContext);
   if (!ctx) throw new Error("useAuth must be used within AuthProvider");

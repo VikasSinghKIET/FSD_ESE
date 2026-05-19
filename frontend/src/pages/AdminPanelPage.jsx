@@ -14,11 +14,7 @@ const AdminPanelPage = () => {
   const [users, setUsers] = useState([]);
   const [activeTab, setActiveTab] = useState("overview"); // overview, users
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
+  async function fetchData() {
     setLoading(true);
     try {
       const [statsRes, usersRes] = await Promise.all([
@@ -27,19 +23,24 @@ const AdminPanelPage = () => {
       ]);
       setStats(statsRes.stats);
       setUsers(usersRes.users);
-    } catch (error) {
+    } catch {
       toast.error("Failed to load admin data");
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchData();
+  }, []);
 
   const handleToggleUser = async (id, currentStatus) => {
     try {
       await authService.toggleUserStatus(id);
       setUsers(users.map(u => u._id === id ? { ...u, isActive: !currentStatus } : u));
       toast.success(`User ${!currentStatus ? 'activated' : 'deactivated'}`);
-    } catch (error) {
+    } catch {
       toast.error("Failed to update user status");
     }
   };

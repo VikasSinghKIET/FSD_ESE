@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
 import { MapPin, Tag, Clock, Brain } from "lucide-react";
-import { formatDate, getStatusClass, getPriorityClass, truncate } from "../utils/helpers";
+import { formatDate, getStatusClass, getPriorityClass } from "../utils/helpers";
 
 const ComplaintCard = ({ complaint, onClick }) => {
   const { _id, title, category, location, status, createdAt, aiAnalysis, isAiAnalyzed } = complaint;

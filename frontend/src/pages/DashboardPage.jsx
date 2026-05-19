@@ -36,7 +36,7 @@ const DashboardPage = () => {
 
         setData({ total: allRes.total, recent: res.complaints });
         setStats({ pending, progress, resolved });
-      } catch (error) {
+      } catch {
         toast.error("Failed to load dashboard data");
       } finally {
         setLoading(false);

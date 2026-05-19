@@ -28,7 +28,7 @@ const ComplaintListPage = () => {
       const res = await complaintService.getAll(params);
       setComplaints(res.complaints);
       setPagination({ page: res.page, pages: res.pages, total: res.total });
-    } catch (error) {
+    } catch {
       toast.error("Failed to load complaints");
     } finally {
       setLoading(false);
@@ -36,6 +36,7 @@ const ComplaintListPage = () => {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchComplaints(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters.category, filters.status]);
