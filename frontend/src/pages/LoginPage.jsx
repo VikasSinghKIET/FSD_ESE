@@ -67,7 +67,7 @@ const LoginPage = () => {
               onChange={handleChange}
               required
             />
-            
+
             <Button type="submit" className="w-full mt-2" loading={loading} size="lg">
               Sign In
             </Button>

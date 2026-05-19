@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { 
-  ArrowLeft, Brain, Trash2, MapPin, Tag, 
+import {
+  ArrowLeft, Brain, Trash2, MapPin, Tag,
   User, CheckCircle, AlertTriangle, Zap
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
@@ -17,7 +17,7 @@ const ComplaintDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isAdmin, user } = useAuth();
-  
+
   const [complaint, setComplaint] = useState(null);
   const [loading, setLoading] = useState(true);
   const [aiLoading, setAiLoading] = useState(false);
@@ -89,7 +89,7 @@ const ComplaintDetailPage = () => {
   return (
     <div className="fade-in max-w-4xl mx-auto space-y-6">
       {/* Back button */}
-      <button 
+      <button
         onClick={() => navigate(-1)}
         className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors"
       >
@@ -99,11 +99,10 @@ const ComplaintDetailPage = () => {
       {/* Header Info */}
       <div className="glass p-6 md:p-8 relative overflow-hidden">
         {/* Status band */}
-        <div className={`absolute top-0 left-0 w-1 h-full ${
-          complaint.status === "Pending" ? "bg-yellow-500" :
-          complaint.status === "In Progress" ? "bg-blue-500" :
-          complaint.status === "Resolved" ? "bg-emerald-500" : "bg-red-500"
-        }`} />
+        <div className={`absolute top-0 left-0 w-1 h-full ${complaint.status === "Pending" ? "bg-yellow-500" :
+            complaint.status === "In Progress" ? "bg-blue-500" :
+              complaint.status === "Resolved" ? "bg-emerald-500" : "bg-red-500"
+          }`} />
 
         <div className="flex flex-col md:flex-row justify-between gap-6">
           <div className="flex-1 space-y-4">
@@ -111,9 +110,9 @@ const ComplaintDetailPage = () => {
               <span className={getStatusClass(complaint.status)}>{complaint.status}</span>
               <span className="text-xs text-slate-500">{formatDateTime(complaint.createdAt)}</span>
             </div>
-            
+
             <h1 className="text-2xl font-bold text-white">{complaint.title}</h1>
-            
+
             <div className="flex flex-wrap gap-4 text-sm text-slate-400">
               <span className="flex items-center gap-1.5"><Tag size={16} />{complaint.category}</span>
               <span className="flex items-center gap-1.5"><MapPin size={16} />{complaint.location}</span>
@@ -136,11 +135,11 @@ const ComplaintDetailPage = () => {
                 </select>
               </div>
             )}
-            
+
             {canDelete && (
-              <Button 
-                variant="danger" 
-                icon={Trash2} 
+              <Button
+                variant="danger"
+                icon={Trash2}
                 onClick={() => setDeleteModal(true)}
                 className="mt-auto"
               >
@@ -170,7 +169,7 @@ const ComplaintDetailPage = () => {
               <p className="text-xs text-slate-400">Powered by OpenRouter</p>
             </div>
           </div>
-          
+
           {(isAdmin || (isOwner && !complaint.isAiAnalyzed)) && (
             <Button onClick={handleAnalyzeAI} loading={aiLoading} icon={Zap}>
               {complaint.isAiAnalyzed ? "Re-Analyze AI" : "Run Analysis"}
@@ -184,7 +183,7 @@ const ComplaintDetailPage = () => {
               <Brain className="mx-auto text-slate-600 mb-3" size={32} />
               <p className="text-slate-400">This complaint hasn't been analyzed by AI yet.</p>
               {(isAdmin || isOwner) && (
-                <button 
+                <button
                   onClick={handleAnalyzeAI}
                   className="mt-2 text-violet-400 text-sm hover:underline"
                 >
@@ -212,7 +211,7 @@ const ComplaintDetailPage = () => {
                   <p className="text-xs text-slate-500 mb-1">AI Confidence</p>
                   <div className="flex items-center gap-3">
                     <div className="flex-1 h-2 bg-slate-800 rounded-full overflow-hidden">
-                      <div 
+                      <div
                         className="h-full bg-gradient-to-r from-violet-500 to-indigo-500"
                         style={{ width: `${complaint.aiAnalysis.confidenceScore}%` }}
                       />
@@ -223,7 +222,7 @@ const ComplaintDetailPage = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="space-y-4">
                 <div className="bg-slate-900/50 rounded-xl p-4 border border-white/5">
                   <p className="text-xs text-slate-500 mb-2 font-medium">Auto-generated Summary</p>
@@ -244,8 +243,8 @@ const ComplaintDetailPage = () => {
       </div>
 
       {/* Delete Modal */}
-      <Modal 
-        isOpen={deleteModal} 
+      <Modal
+        isOpen={deleteModal}
         onClose={() => setDeleteModal(false)}
         title="Delete Complaint"
         footer={

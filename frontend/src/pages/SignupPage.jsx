@@ -84,7 +84,7 @@ const SignupPage = () => {
               required
               minLength={6}
             />
-            
+
             <Button type="submit" className="w-full mt-2" loading={loading} size="lg">
               Sign Up
             </Button>

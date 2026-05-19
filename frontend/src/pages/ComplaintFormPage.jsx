@@ -38,7 +38,7 @@ const ComplaintFormPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
+
     try {
       const res = await complaintService.create(formData);
       toast.success("Complaint submitted successfully!");

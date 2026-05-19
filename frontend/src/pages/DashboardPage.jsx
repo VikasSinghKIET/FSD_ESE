@@ -10,7 +10,7 @@ import Button from "../components/Button";
 import Loader from "../components/Loader";
 
 const DashboardPage = () => {
-  const { user, isAdmin } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({ total: 0, recent: [] });
@@ -20,13 +20,8 @@ const DashboardPage = () => {
     const fetchDashboardData = async () => {
       try {
         const res = await complaintService.getAll({ limit: 5 });
-        
-        // Calculate basic stats from all complaints (if we fetched all)
-        // Since we are only fetching 5 for the list, we'll make a second call for stats
-        // if it's admin, or just use the total from the first call.
-        // For simplicity in this view, we'll derive it from a larger fetch or rely on total.
         const allRes = await complaintService.getAll({ limit: 100 });
-        
+
         let pending = 0, progress = 0, resolved = 0;
         allRes.complaints.forEach(c => {
           if (c.status === "Pending") pending++;
@@ -56,11 +51,9 @@ const DashboardPage = () => {
           <h1 className="text-2xl font-bold text-white">Dashboard</h1>
           <p className="text-slate-400 mt-1">Welcome back, {user?.name}</p>
         </div>
-        {!isAdmin && (
-          <Button onClick={() => navigate("/complaints/new")} icon={Plus}>
-            New Complaint
-          </Button>
-        )}
+        <Button onClick={() => navigate("/complaints/new")} icon={Plus}>
+          New Complaint
+        </Button>
       </div>
 
       {/* Stats Grid */}
@@ -89,18 +82,16 @@ const DashboardPage = () => {
             </div>
             <h3 className="text-lg font-medium text-white mb-1">No complaints yet</h3>
             <p className="text-slate-400 mb-6">You haven't submitted any complaints.</p>
-            {!isAdmin && (
-              <Button onClick={() => navigate("/complaints/new")} icon={Plus}>
-                Submit your first complaint
-              </Button>
-            )}
+            <Button onClick={() => navigate("/complaints/new")} icon={Plus}>
+              Submit your first complaint
+            </Button>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {data.recent.map((complaint) => (
-              <ComplaintCard 
-                key={complaint._id} 
-                complaint={complaint} 
+              <ComplaintCard
+                key={complaint._id}
+                complaint={complaint}
                 onClick={(id) => navigate(`/complaints/${id}`)}
               />
             ))}

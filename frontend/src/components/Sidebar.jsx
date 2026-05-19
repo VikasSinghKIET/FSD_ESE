@@ -66,11 +66,11 @@ const Sidebar = ({ isOpen, onClose }) => {
           {navItems
             .filter(item => !isAdmin || item.to === "/dashboard")
             .map(({ to, icon: Icon, label }) => (
-            <NavLink key={to} to={to} className={linkClass} onClick={onClose}>
-              <Icon size={18} />
-              {label}
-            </NavLink>
-          ))}
+              <NavLink key={to} to={to} className={linkClass} onClick={onClose}>
+                <Icon size={18} />
+                {label}
+              </NavLink>
+            ))}
 
           {isAdmin && (
             <>

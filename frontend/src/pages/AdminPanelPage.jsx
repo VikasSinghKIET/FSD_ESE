@@ -62,21 +62,19 @@ const AdminPanelPage = () => {
       <div className="flex gap-2 border-b border-white/10 pb-px mb-6">
         <button
           onClick={() => setActiveTab("overview")}
-          className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
-            activeTab === "overview" 
-              ? "border-violet-500 text-violet-400" 
+          className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === "overview"
+              ? "border-violet-500 text-violet-400"
               : "border-transparent text-slate-400 hover:text-white"
-          }`}
+            }`}
         >
           Overview
         </button>
         <button
           onClick={() => setActiveTab("users")}
-          className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
-            activeTab === "users" 
-              ? "border-violet-500 text-violet-400" 
+          className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === "users"
+              ? "border-violet-500 text-violet-400"
               : "border-transparent text-slate-400 hover:text-white"
-          }`}
+            }`}
         >
           User Management
         </button>
@@ -104,8 +102,8 @@ const AdminPanelPage = () => {
                       <span className="text-slate-400">{count}</span>
                     </div>
                     <div className="w-full bg-slate-800 rounded-full h-2">
-                      <div 
-                        className="bg-violet-500 h-2 rounded-full" 
+                      <div
+                        className="bg-violet-500 h-2 rounded-full"
                         style={{ width: `${(count / stats.total) * 100}%` }}
                       />
                     </div>
@@ -154,9 +152,8 @@ const AdminPanelPage = () => {
                     <td className="px-6 py-4 text-white font-medium">{u.name}</td>
                     <td className="px-6 py-4 text-slate-300">{u.email}</td>
                     <td className="px-6 py-4">
-                      <span className={`px-2 py-1 rounded text-xs font-medium ${
-                        u.role === 'admin' ? 'bg-violet-500/20 text-violet-400' : 'bg-slate-500/20 text-slate-300'
-                      }`}>
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${u.role === 'admin' ? 'bg-violet-500/20 text-violet-400' : 'bg-slate-500/20 text-slate-300'
+                        }`}>
                         {u.role}
                       </span>
                     </td>
@@ -169,8 +166,8 @@ const AdminPanelPage = () => {
                     </td>
                     <td className="px-6 py-4 text-right">
                       {u.role !== 'admin' && (
-                        <Button 
-                          variant={u.isActive ? "danger" : "success"} 
+                        <Button
+                          variant={u.isActive ? "danger" : "success"}
                           size="sm"
                           onClick={() => handleToggleUser(u._id, u.isActive)}
                         >

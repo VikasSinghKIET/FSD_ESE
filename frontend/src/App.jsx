@@ -18,12 +18,12 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Toaster 
+        <Toaster
           position="top-right"
           toastOptions={{
             className: "glass !bg-slate-900/90 !text-slate-200 !border-white/10",
             style: { backdropFilter: "blur(12px)" }
-          }} 
+          }}
         />
         <Routes>
           {/* Public Routes */}
@@ -37,11 +37,11 @@ function App() {
             <Route path="/complaints/new" element={<ComplaintFormPage />} />
             <Route path="/complaints" element={<ComplaintListPage />} />
             <Route path="/complaints/:id" element={<ComplaintDetailPage />} />
-            
+
             {/* Admin Only Route */}
-            <Route 
-              path="/admin" 
-              element={<ProtectedRoute adminOnly><AdminPanelPage /></ProtectedRoute>} 
+            <Route
+              path="/admin"
+              element={<ProtectedRoute adminOnly><AdminPanelPage /></ProtectedRoute>}
             />
           </Route>
 

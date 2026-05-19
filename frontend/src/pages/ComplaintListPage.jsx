@@ -24,7 +24,7 @@ const ComplaintListPage = () => {
       const params = { ...filters, page, limit: 12 };
       // Clean empty filters
       Object.keys(params).forEach(k => !params[k] && delete params[k]);
-      
+
       const res = await complaintService.getAll(params);
       setComplaints(res.complaints);
       setPagination({ page: res.page, pages: res.pages, total: res.total });
@@ -116,9 +116,9 @@ const ComplaintListPage = () => {
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {complaints.map(c => (
-              <ComplaintCard 
-                key={c._id} 
-                complaint={c} 
+              <ComplaintCard
+                key={c._id}
+                complaint={c}
                 onClick={(id) => navigate(`/complaints/${id}`)}
               />
             ))}
@@ -131,11 +131,10 @@ const ComplaintListPage = () => {
                 <button
                   key={i + 1}
                   onClick={() => fetchComplaints(i + 1)}
-                  className={`w-10 h-10 rounded-xl font-medium transition-all ${
-                    pagination.page === i + 1
+                  className={`w-10 h-10 rounded-xl font-medium transition-all ${pagination.page === i + 1
                       ? "bg-violet-600 text-white shadow-lg shadow-violet-500/25"
                       : "bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white"
-                  }`}
+                    }`}
                 >
                   {i + 1}
                 </button>

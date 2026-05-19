@@ -37,16 +37,16 @@ const HomePage = () => {
           <Brain size={16} />
           <span>Powered by OpenRouter AI</span>
         </div>
-        
+
         <h1 className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400 tracking-tight mb-6 fade-in" style={{ animationDelay: "100ms" }}>
           Smarter Complaint <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">Management</span>
         </h1>
-        
+
         <p className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed fade-in" style={{ animationDelay: "200ms" }}>
           Report issues effortlessly. Our AI analyzes priority, routes it to the right department, and tracks resolution automatically.
         </p>
-        
+
         <div className="flex flex-col sm:flex-row items-center gap-4 fade-in" style={{ animationDelay: "300ms" }}>
           <Link to="/signup" className="btn-primary text-lg px-8 py-4 w-full sm:w-auto">
             Start Reporting Now
@@ -55,7 +55,7 @@ const HomePage = () => {
             Track Existing Issue
           </Link>
         </div>
-        
+
         {/* Features grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 w-full fade-in" style={{ animationDelay: "400ms" }}>
           <div className="glass p-6 text-left">
